@@ -13,7 +13,7 @@ def create_app():
     except OSError:
         pass
 
-    @app.route('/api/<action>')
+    @app.route('/api/<action>',  methods=['POST'])
     def actionHandler(action):
         return action
 
