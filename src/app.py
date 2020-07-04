@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 def create_app():
@@ -16,6 +16,20 @@ def create_app():
     @app.route('/api/<action>',  methods=['POST'])
     def actionHandler(action):
         return action
+
+    @app.route('/api/urlecho/<data>',  methods=['POST'])
+    def urlechoHandler(data):
+        return data
+
+    @app.route('/api/jsonecho',  methods=['POST'])
+    def jsonechoHandler():
+        data = request.json
+
+        resp = {
+            'result': data['data']
+        }
+
+        return jsonify(resp) 
 
     return app
 
