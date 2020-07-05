@@ -28,7 +28,7 @@ class my_model(model):
     return {}
 
 
-demo = create_demo(my_model())
-demo.run(host='0.0.0.0')
+app = create_demo(my_model())
 
-
+if __name__ == "__main__":
+  app.run()
