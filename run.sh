@@ -1,4 +1,3 @@
 #! /usr/bin/bash
 
-export FLASK_ENV=development
-python3 ./src/app.py
+FLASK_ENV=development python3 ./demo.py

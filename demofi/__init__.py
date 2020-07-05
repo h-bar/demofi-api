@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-def create_app():
+def create_demo():
     app = Flask("demopy", instance_relative_config=True)
     app.config.update(
         DEBUG=True,
@@ -30,10 +30,10 @@ def create_app():
         }
 
         return jsonify(resp) 
-
+    
+    CORS(app)
     return app
 
 if __name__ == "__main__":
-    app = create_app()
-    CORS(app)
+    app = create_demo()
     app.run(host='0.0.0.0')
