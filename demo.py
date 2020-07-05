@@ -3,32 +3,42 @@ from demofi.model import model
 
 
 class my_model(model):
-  def __init__(self):
-    super(model).__init__()    
+  def __init__(self, sample_data: str, sample_result: {}):
+    super(my_model, self).__init__(sample_data, sample_result)    
   
   def save_data(self, data: str) -> str:
     return hash(data)
   
-  def get_data(self, id: str) -> str:
-    return id
+  def get_data(self, data_id: str) -> str:
+    return "dfsdfss"
 
+  def rm_data(self, data_id: str) -> bool:
+    return True
+    
   def run_data(self, data: str) -> {}:
-    id = self.save_data(data)
+    data_id = self.save_data(data)
     return {
-      'id': id
+      'result': hash(data),
     }
 
-  def run_id(self, id: str) -> {}:
-    data = self.get_data(id)
+  def run_id(self, data_id: str) -> {}:
+    data = self.get_data(data_id)
     return {
-      'id': id
+      'result': hash(data)
     }
   
   def run_data_no_save(self, data: str) -> {}:
-    return {}
+    return {
+      'result': hash(data)
+    }
 
 
-app = create_demo(my_model())
+sample_data = "dfsdfss"
+sample_result = {
+  'result': hash(sample_data)
+}
+
+app = create_demo(my_model(sample_data, sample_result))
 
 if __name__ == "__main__":
   app.run()
