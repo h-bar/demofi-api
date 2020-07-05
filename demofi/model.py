@@ -8,6 +8,9 @@ class model:
   def get_data(self, id: str) -> str:
     raise NotImplementedError("Please implement get_data interface in your model class")
 
+  def rm_data(self, data_id: str) -> bool:
+    raise NotImplementedError("Please implement rm_data interface in your model class")
+
   def run_data(self, data: str) -> {}:
     raise NotImplementedError("Please implement run_data interface in your model class")
 
