@@ -31,3 +31,36 @@ class dummyDB(abstractDB):
 
   def add_truth(self, data_id: str, truth: {}) -> bool:
     return True
+
+import sqlite3
+class sqliteDB(abstractDB):
+  def __init__(self, db_file, init_schma):
+    super(sqliteDB, self).__init__()
+
+    self.db_file = db_file
+    conn = self.get_conn()
+    
+    with open('schema.sql') as f:
+        conn.executescript(f.read())
+
+  def get_conn(self):
+    conn = sqlite3.connect(self.db_file)
+    conn.row_factory = sqlite3.Row
+    
+    return conn
+
+  def save_data(self, data: str) -> str:
+    conn = self.get_conn()
+    conn.execute('INSERT INTO dataT (dataStr) VALUES (?)', (data))
+    conn.commit()
+
+    return hash(data)
+  
+  def get_data(self, data_id: str) -> str:
+    return "dfsdfss"
+
+  def rm_data(self, data_id: str) -> bool:
+    return True
+
+  def add_truth(self, data_id: str, truth: {}) -> bool:
+    return True
