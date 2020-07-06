@@ -8,9 +8,6 @@ from demofi.model import model
 class demo_app:
     def __init__(self, m: model):    
         self.app = Flask(__name__.split('.')[0], instance_relative_config=True)
-        self.app.config.update(
-            DEBUG=True,
-        )
         self.m = m
 
         try:
