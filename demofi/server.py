@@ -20,20 +20,34 @@ class demo_app:
 
         CORS(self.app)
 
-        @self.app.route('/api/<action>',  methods=['POST'])
-        def actionHandler(action):
-            return action
+        @self.app.route("/api/data", methods=['POST'])
+        def saveHandler():
+            if 'data' not in request.json:
+                return {}
 
-        @self.app.route('/api/urlecho/<data>',  methods=['POST'])
-        def urlechoHandler(data):
-            return data
+            data = request.json['data']
+            data_id = self.m.save_data(data)
 
-        @self.app.route('/api/jsonecho',  methods=['POST'])
-        def jsonechoHandler():
-            data = request.json
-
-            resp = {
-                'result': data['data']
+            return {
+                'id': data_id
             }
 
-            return jsonify(resp)
+        @self.app.route("/api/data/<data_id>", methods=['GET'])
+        def getHandler(data_id):
+            data = self.m.get_data(data_id)
+
+            if data == None:
+                return {}
+                
+            return {
+                'id': data_id,
+                'data': data
+            }
+
+        @self.app.route("/api/data/<data_id>", methods=['DELETE'])
+        def rmHandler(data_id):
+            result = self.m.rm_data(data_id)
+            return {
+                'id': data_id,
+                'result': result
+            }
