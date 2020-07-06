@@ -2,11 +2,11 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from demofi.model import model
+from demofi.model import BaseModel
 
 
 class demo_app:
-    def __init__(self, m: model):    
+    def __init__(self, m: BaseModel):    
         self.app = Flask(__name__.split('.')[0], instance_relative_config=True)
         self.m = m
 

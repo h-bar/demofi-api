@@ -1,8 +1,8 @@
 from demofi import create_demo
-from demofi.model import model
+from demofi.model import BaseModel
 
 
-class my_model(model):
+class my_model(BaseModel):
   def __init__(self, sample_data: str, sample_result: {}):
     super(my_model, self).__init__(sample_data, sample_result)    
   

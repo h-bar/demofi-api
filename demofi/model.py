@@ -1,4 +1,4 @@
-class model:
+class BaseModel:
   def __init__(self, sample_data: str, sample_result: {}):
     sample_id = self.save_data(sample_data)
     sample_data = self.get_data(sample_id)
