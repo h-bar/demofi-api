@@ -38,7 +38,7 @@ class demo_app:
 
             if data == None:
                 return {}
-                
+
             return {
                 'id': data_id,
                 'data': data
@@ -47,6 +47,46 @@ class demo_app:
         @self.app.route("/api/data/<data_id>", methods=['DELETE'])
         def rmHandler(data_id):
             result = self.m.rm_data(data_id)
+            return {
+                'id': data_id,
+                'result': result
+            }
+
+        @self.app.route("/api/run", methods=['GET'])
+        def runHandler():
+            if 'data' not in request.json:
+                return {}
+            
+            data = request.json['data']
+            data_id = self.m.save_data(data)
+            result = self.m.run(data)
+
+            return {
+                'id': data_id,
+                'result': result
+            }
+
+        @self.app.route("/api/run_no_save", methods=['GET'])
+        def runNoSaveHandler():
+            if 'data' not in request.json:
+                return {}
+            
+            data = request.json['data']
+            result = self.m.run(data)
+
+            return {
+                'id': "",
+                'result': result
+            }
+
+        @self.app.route("/api/run/<data_id>", methods=['GET'])
+        def runIDHandler(data_id):
+            data = self.m.get_data(data_id)
+
+            if data == None:
+                return {}
+            
+            result = self.m.run(data)
             return {
                 'id': data_id,
                 'result': result
