@@ -4,7 +4,7 @@ class BaseModel:
     sample_data = self.get_data(sample_id)
 
     assert(self.run(sample_data) == sample_result)
-
+    assert(self.add_truth(sample_id, sample_result))
     assert(self.rm_data(sample_id))
     
   def save_data(self, data: str) -> str:
@@ -18,3 +18,6 @@ class BaseModel:
 
   def run(self, data: str) -> {}:
     raise NotImplementedError("Please implement run_data interface in your model class")
+
+  def add_truth(self, data_id: str, truth: {}) -> bool:
+    raise NotImplementedError("Please implement add_truth interface in your model class")

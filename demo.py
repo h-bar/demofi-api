@@ -21,6 +21,9 @@ class my_model(BaseModel):
       'result': hash(data),
     }
 
+  def add_truth(self, data_id: str, truth: {}) -> bool:
+    return True
+
 
 sample_data = "dfsdfss"
 sample_result = {
