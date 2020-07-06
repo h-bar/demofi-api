@@ -15,21 +15,10 @@ class my_model(model):
   def rm_data(self, data_id: str) -> bool:
     return True
     
-  def run_data(self, data: str) -> {}:
+  def run(self, data: str) -> {}:
     data_id = self.save_data(data)
     return {
       'result': hash(data),
-    }
-
-  def run_id(self, data_id: str) -> {}:
-    data = self.get_data(data_id)
-    return {
-      'result': hash(data)
-    }
-  
-  def run_data_no_save(self, data: str) -> {}:
-    return {
-      'result': hash(data)
     }
 
 
