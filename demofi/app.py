@@ -87,7 +87,7 @@ class demo_app:
                     return {}
                 
                 data = request.json['data']
-                resul = self.run(data)
+                result = self.run(data)
 
                 return {
                     'id': '',
