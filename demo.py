@@ -6,7 +6,7 @@ def run_model(data: str) -> {}:
 
 db = dummyDB()
 # demo = demo_app(run_model)
-demo = demo_app(run_model, dummyDB)
+demo = demo_app(run_model, db)
 app = demo.app
 
 if __name__ == "__main__":

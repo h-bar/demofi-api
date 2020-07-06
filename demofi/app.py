@@ -73,7 +73,7 @@ class demo_app:
                     return {}
                 
                 data = request.json['data']
-                data_id = self.db.save_data(data, data)
+                data_id = self.db.save_data(data)
                 result = self.run(data)
 
                 return {
