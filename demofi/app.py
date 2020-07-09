@@ -108,12 +108,21 @@ class demo_app:
                 }
 
             @self.app.route("/api/truth/<data_id>", methods=['POST'])
-            def truthHandler(data_id):
+            def addTruthHandler(data_id):
                 if 'truth' not in request.json:
                     return {}
                 
                 truth = request.json['truth']
                 result = self.db.add_truth(data_id, truth)
+
+                return {
+                    'id': data_id,
+                    'result': result
+                }
+
+            @self.app.route("/api/truth/<data_id>", methods=['GET'])
+            def getTruthHandler(data_id):
+                result = self.db.get_truth(data_id)
 
                 return {
                     'id': data_id,
