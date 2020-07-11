@@ -58,15 +58,6 @@ class demo_app:
           'data': data
         }
 
-      @self.app.route("/api/data/<data_id>", methods=['DELETE'])
-      def rmHandler(data_id):
-        result = self.db.rm_data(data_id)
-        return {
-          'id': data_id,
-          'result': result
-        }
-      
-
       @self.app.route("/api/run", methods=['POST'])
       def runHandler():
         if 'data' not in request.json:
