@@ -65,6 +65,8 @@ class sqliteDB(abstractDB):
   def get_data(self, data_id: str) -> {}:
     conn = self.get_conn()
     result = conn.execute('SELECT dataStr FROM dataT WHERE id = (?)', (data_id, )).fetchone()
+    if result == None:
+      return {}
     return self.to_data(result['dataStr'])
 
   def add_truth(self, data_id: str, truth: {}) -> bool:
@@ -78,4 +80,6 @@ class sqliteDB(abstractDB):
   def get_truth(self, data_id: str) -> {}:
     conn = self.get_conn()
     result = conn.execute('SELECT truth FROM dataT WHERE id = (?)', (data_id, )).fetchone()
+    if result == None:
+      return {}
     return self.to_data(result['truth'])
