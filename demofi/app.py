@@ -26,7 +26,8 @@ class demo_app:
           return {}
         
         data = request.json['data']
-        result = self.run(data)
+        param = request.json['param']
+        result = self.run(data, param)
 
         return {
           'id': '',
@@ -65,7 +66,8 @@ class demo_app:
         
         data = request.json['data']
         data_id = self.db.save_data(data)
-        result = self.run(data)
+        param = request.json['param']
+        result = self.run(data, param)
 
         return {
           'id': data_id,
@@ -78,7 +80,8 @@ class demo_app:
           return {}
         
         data = request.json['data']
-        result = self.run(data)
+        param = request.json['param']
+        result = self.run(data, param)
 
         return {
           'id': '',
@@ -88,11 +91,11 @@ class demo_app:
       @self.app.route("/api/run/<data_id>", methods=['POST'])
       def runIDHandler(data_id):
         data = self.db.get_data(data_id)
-
         if data == None:
           return {}
         
-        result = self.run(data)
+        param = request.json['param']
+        result = self.run(data, param)
         return {
           'id': data_id,
           'result': result
