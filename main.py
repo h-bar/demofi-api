@@ -1,5 +1,5 @@
 from demofi.app import demo_app
-from my_demo import run_model, model_db
+from my_demo import run_model
 from demofi import db
 
 model_db = db.sqliteDB('./db.db', './schema.sql')
