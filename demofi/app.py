@@ -22,23 +22,32 @@ class demo_app:
       @self.app.route("/api/run", methods=['POST'])
       @self.app.route("/api/run_no_save", methods=['POST'])
       def runHandler():
-        if 'data' not in request.json:
-          return {}
+        if request.json == None or 'data' not in request.json:
+          return {
+            'id': None,
+            'result': None
+          }
         
         data = request.json['data']
-        param = request.json['param']
+        
+        param = None
+        if 'param' in request.json:
+          param = request.json['param']
+          
         result = self.run(data, param)
 
         return {
-          'id': '',
+          'id': None,
           'result': result
         }
 
     else:
       @self.app.route("/api/data", methods=['POST'])
       def saveHandler():
-        if 'data' not in request.json:
-          return {}
+        if request.json == None or 'data' not in request.json:
+          return {
+            'id': None
+          }
 
         data = request.json['data']
         data_id = self.db.save_data(data)
@@ -52,7 +61,10 @@ class demo_app:
         data = self.db.get_data(data_id)
 
         if data == None:
-          return {}
+          return {
+            'id': None,
+            'data': None
+          }
 
         return {
           'id': data_id,
@@ -61,12 +73,19 @@ class demo_app:
 
       @self.app.route("/api/run", methods=['POST'])
       def runHandler():
-        if 'data' not in request.json:
-          return {}
+        if request.json == None or 'data' not in request.json:
+          return {
+            'id': None,
+            'result': None
+          }
         
         data = request.json['data']
         data_id = self.db.save_data(data)
-        param = request.json['param']
+        
+        param = None
+        if 'param' in request.json:
+          param = request.json['param']
+        
         result = self.run(data, param)
 
         return {
@@ -76,15 +95,22 @@ class demo_app:
 
       @self.app.route("/api/run_no_save", methods=['POST'])
       def runNoSaveHandler():
-        if 'data' not in request.json:
-          return {}
+        if request.json == None or 'data' not in request.json:
+          return {
+            'id': None,
+            'result': None
+          }
         
         data = request.json['data']
-        param = request.json['param']
+        
+        param = None
+        if 'param' in request.json:
+          param = request.json['param']
+        
         result = self.run(data, param)
 
         return {
-          'id': '',
+          'id': None,
           'result': result
         }
 
@@ -92,9 +118,15 @@ class demo_app:
       def runIDHandler(data_id):
         data = self.db.get_data(data_id)
         if data == None:
-          return {}
+          return {
+            'id': None,
+            'result': None
+          }
         
-        param = request.json['param']
+        param = None
+        if 'param' in request.json:
+          param = request.json['param']
+        
         result = self.run(data, param)
         return {
           'id': data_id,
@@ -103,8 +135,11 @@ class demo_app:
 
       @self.app.route("/api/truth/<data_id>", methods=['POST'])
       def addTruthHandler(data_id):
-        if 'truth' not in request.json:
-          return {}
+        if request.json == None or 'truth' not in request.json:
+          return {
+            'id': data_id,
+            'result': False
+          }
         
         truth = request.json['truth']
         result = self.db.add_truth(data_id, truth)

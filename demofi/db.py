@@ -80,6 +80,6 @@ class sqliteDB(abstractDB):
   def get_truth(self, data_id: str) -> {}:
     conn = self.get_conn()
     result = conn.execute('SELECT truth FROM dataT WHERE id = (?)', (data_id, )).fetchone()
-    if result == None:
+    if result == None or result['truth'] == None:
       return {}
     return self.to_data(result['truth'])
