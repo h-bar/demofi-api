@@ -116,9 +116,9 @@ class demo_app:
 
       @self.app.route("/api/truth/<data_id>", methods=['GET'])
       def getTruthHandler(data_id):
-        result = self.db.get_truth(data_id)
+        truth = self.db.get_truth(data_id)
 
         return {
           'id': data_id,
-          'result': result
+          'truth': truth
         }
