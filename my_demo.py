@@ -1,2 +1,3 @@
+import json
 def run_model(data: {}, param: {}) -> {}:
-  return hash(str(data))
+  return {'str': json.dumps(data)}
