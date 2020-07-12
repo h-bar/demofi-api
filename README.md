@@ -4,18 +4,96 @@ Demofi is a template to build and deploy a quick demo for your Machine Learning 
 
 ## Usage
 
-Modify my_demo.py to fit you model into  `run_model`. Upon each request, `run_model` will be called with a python object containning data sent along with the request as parameter. The returned value will be sent back as response in JSON format.
+Modify my_demo.py to fit you model into  `run_model`. Upon each request, `run_model` will be called with a python objects containning data and parameers sent along with the request as parameter. The returned value will be sent back as response in JSON format.
 
 ## Endpoint
 
-- `POST /api/run`
-  run the model with posted data. `data` field in request body with be used as parameter to call `run_model` as well as be saved to database. An `id` to the saved data and `result` will be sent along with response.
+- ```JSON
+  POST /api/run
+  reqest => 
+  {
+    "data": {},
+    "param": {}
+  }
+  response =>
+  {
+    "id": "",
+    "result": {}
+  }
+  Run the model with data and parameter. The data will be saved to database. Data id and model result are returned as response.
 
-- `POST /api/<data_id>`
-  run the model with data saved in data base. `data` field in request body with be used as parameter to call `run_model` as well as be saved to database. An `id` to the saved data and `result` will be sent along with response.
-  
-- `POST /api/run_no_save`
-- `POST /api/data`
-- `GET /api/data/<data_id>`
-- `POST /api/truth`
-- `POST /api/truth/<data_id>`
+- ```JSON
+  POST /api/run/<data_id>
+  reqest => 
+  {
+    "data": {},
+    "param": {}
+  }
+  response =>
+  {
+    "id": "",
+    "result": {}
+  }
+  Run the model with data saved in data base specified by the data_id, and parameter. Data id and model result are returned as response.
+
+- ```JSON
+  POST /api/run_no_save
+  reqest => 
+  {
+    "data": {},
+    "param": {}
+  }
+  response =>
+  {
+    "id": null,
+    "result": {}
+  }
+  Run the model with data and parameter. The data will not be saved to database. Only model result is returned as response.
+
+- ```JSON
+  POST /api/data
+  reqest => 
+  {
+    "data": {}
+  }
+  response =>
+  {
+    "id": null
+  }
+  Save data to the database. Data id is returned as the response
+
+
+- ```JSON
+  GET /api/data/<data_id>
+  reqest => 
+  {}
+  response =>
+  {
+    "id":  "",
+    "data": {}
+  }
+  Retrive data stored in the database. Data id and data are returned as the response
+ 
+- ```JSON
+  POST /api/truth/<data_id>
+  reqest => 
+  {
+    "truth": {}
+  }
+  response =>
+  {
+    "id":  "",
+    "result": {}
+  }
+  Upload a truth to a data saved in the database. Data id and the insertion result are returned as the response
+
+- ```JSON
+  GET /api/data/<data_id>
+  reqest => 
+  {}
+  response =>
+  {
+    "id":  "",
+    "result": {}
+  }
+  Retrive truth of a data saved in the database. Data id and truth are returned as the response
