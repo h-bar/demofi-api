@@ -1,7 +1,7 @@
 import requests
 from tests.config import server_url
 from tests.config import no_id
-from my_demo import run_model
+from my_demo import my_model
 
 data_id = ""
 data = {
@@ -12,6 +12,9 @@ param = {
   "content": "test"
 }
 
+m = my_model()
+m.init_model()
+
 def test_run_data():
   server_on = True
   try:
@@ -20,7 +23,7 @@ def test_run_data():
     server_on = False
   assert server_on
   print(data)
-  assert res.json()['result'] == run_model(data, None)
+  assert res.json()['result'] == m.run_model(data, None)
   global data_id
   data_id = res.json()['id']
 
@@ -60,7 +63,7 @@ def test_run_param():
   print(data)
   assert res.json() == {
     'id': data_id,
-    'result': run_model(data, param)
+    'result': m.run_model(data, param)
   }
 
 
@@ -74,7 +77,7 @@ def test_run_no_save():
   print(data)
   assert res.json() == {
     'id': None,
-    'result': run_model(data, param)
+    'result': m.run_model(data, param)
   }
 
 def test_run_data_id():
@@ -87,5 +90,5 @@ def test_run_data_id():
   print(data)
   assert res.json() == {
     'id': data_id,
-    'result': run_model(data, param)
+    'result': m.run_model(data, param)
   }

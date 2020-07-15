@@ -2,15 +2,16 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from demofi.db import *
-
+from demofi.db import abstractDB
+from demofi.model import abstractModel
 
 class demo_app:
-  def __init__(self, r: callable, db : abstractDB = None):    
+  def __init__(self, m: abstractModel, db : abstractDB = None):    
     self.app = Flask(__name__.split('.')[0], instance_relative_config=True)
-    self.run = r
+    self.model = m
     self.db = db
-
+    
+    self.model.init_model()
     try:
       os.makedirs(self.app.instance_path)
     except OSError:
@@ -34,7 +35,7 @@ class demo_app:
         if 'param' in request.json:
           param = request.json['param']
           
-        result = self.run(data, param)
+        result = self.model.run_model(data, param)
 
         return {
           'id': None,
@@ -86,7 +87,7 @@ class demo_app:
         if 'param' in request.json:
           param = request.json['param']
         
-        result = self.run(data, param)
+        result = self.model.run_model(data, param)
 
         return {
           'id': data_id,
@@ -107,7 +108,7 @@ class demo_app:
         if 'param' in request.json:
           param = request.json['param']
         
-        result = self.run(data, param)
+        result = self.model.run_model(data, param)
 
         return {
           'id': None,
@@ -127,7 +128,7 @@ class demo_app:
         if 'param' in request.json:
           param = request.json['param']
         
-        result = self.run(data, param)
+        result = self.model.run_model(data, param)
         return {
           'id': data_id,
           'result': result
