@@ -1,6 +1,6 @@
 # Demofi [Under early development]
 
-Demofi is a template to build and deploy a quick demo for your Machine Learning model. This repository only includes code for an API server. For a web app demo using this API server. Please see [demofi-web](https://github.com/h-bar/demofi-web).
+Demofi is a template to build and deploy a quick demo for your Machine Learning model. This repository only includes code for an API server. For a web app demo using this API server. Please see [demofi](https://github.com/h-bar/demofi).
 
 ## Usage
 
