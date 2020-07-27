@@ -11,9 +11,13 @@ class my_model(abstractModel):
   def run_model(self, data: {}, param: {}) -> {}:
     text = nltk.word_tokenize(data['content'])
     tagged = nltk.pos_tag(text)
-    result = {}
+    result = {
+      'tokens': [],
+      'labels': []
+    }
     for t in tagged:
-      result[t[0]] = t[1]
+      result['tokens'].append(t[0])
+      result['labels'].append(t[1])
     return result
 
   def destroy_model(self):
