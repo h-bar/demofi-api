@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /bin/bash
 
 if [ $1 == "dev" ]; then
   FLASK_ENV=development python3 ./main.py
